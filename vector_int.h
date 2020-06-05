@@ -188,9 +188,11 @@ vector<int> operator-(const vector<int> &u,const vector<int> &v) {
     if (u < v) {
         p = v;
         q = u;
-    } else {
+    } else if (u > v) {
         p = u;
         q = v;
+    } else {
+        return {0};
     }
 
     for (int i = 0; i < p.size(); i++) {
@@ -219,12 +221,69 @@ vector<int> operator-(const vector<int> &u,const vector<int> &v) {
 
 
 vector<int> operator/(const vector<int> &u, vector<int> &v) {
-    vector<int> quotient;
+    vector<int> quotient, t, p;
 
-    
+    if (u < v) {
+        return {0};
+    } else if (u == v) {
+        return {1};
+    }
+
+    for (int i = u.size()-1; i >= 0; i--) {
+        p.insert(p.begin(), u[i]);
+
+        if (p < v && i != 0) {
+            continue;
+        }
+
+        for (int j = 1; j <= 9; j++) {
+            t.push_back(j);
+            t = v*t;
+
+            if (t > p) {
+                quotient.insert(quotient.begin(), j-1);   
+                p = p + v - t;
+                t.clear();
+                break;
+            }
+
+            t.clear();
+        }
+    }
 
     return quotient;
 }
 
 
+vector<int> operator%(const vector<int> &u, vector<int> &v) {
+    vector<int> remainder, t, p;
 
+    if (u < v) {
+        return u;
+    } else if (u == v) {
+        return {0};
+    }
+
+    for (int i = u.size()-1; i >= 0; i--) {
+        p.insert(p.begin(), u[i]);
+
+        if (p < v && i != 0) {
+            continue;
+        }
+
+        for (int j = 1; j <= 9; j++) {
+            t.push_back(j);
+            t = v*t;
+
+            if (t > p) {
+                p = p + v - t;
+                t.clear();
+                break;
+            }
+
+            t.clear();
+        }
+    }
+
+    return p;
+}

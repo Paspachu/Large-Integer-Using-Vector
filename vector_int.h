@@ -2,6 +2,8 @@
 #include <vector>
 using namespace std;
 
+vector<int> vzero = {0};
+
 
 void print(vector<int> v) {
     for (int i = v.size()-1; i >= 0; i--) {
@@ -230,14 +232,19 @@ vector<int> operator/(const vector<int> &u, vector<int> &v) {
     }
 
     for (int i = u.size()-1; i >= 0; i--) {
+        if (p == vzero) {
+            p.pop_back();
+        }
+
         p.insert(p.begin(), u[i]);
 
         if (p < v && i != 0) {
+            quotient.insert(quotient.begin(), 0);
             continue;
         }
 
-        for (int j = 1; j <= 9; j++) {
-            t.push_back(j);
+        for (int j = 1; j <= 10; j++) {
+            t = int_to_vector(j);
             t = v*t;
 
             if (t > p) {
@@ -251,12 +258,20 @@ vector<int> operator/(const vector<int> &u, vector<int> &v) {
         }
     }
 
+    for (int i = quotient.size()-1; i >= 0; i--) {
+        if (quotient[i] != 0) {
+            break;
+        }
+
+        quotient.pop_back();
+    }
+
     return quotient;
 }
 
 
 vector<int> operator%(const vector<int> &u, vector<int> &v) {
-    vector<int> remainder, t, p;
+    vector<int> remainder, q;
 
     if (u < v) {
         return u;
@@ -264,26 +279,8 @@ vector<int> operator%(const vector<int> &u, vector<int> &v) {
         return {0};
     }
 
-    for (int i = u.size()-1; i >= 0; i--) {
-        p.insert(p.begin(), u[i]);
+    q = u / v;
+    remainder = u - v*q;
 
-        if (p < v && i != 0) {
-            continue;
-        }
-
-        for (int j = 1; j <= 9; j++) {
-            t.push_back(j);
-            t = v*t;
-
-            if (t > p) {
-                p = p + v - t;
-                t.clear();
-                break;
-            }
-
-            t.clear();
-        }
-    }
-
-    return p;
+    return remainder;
 }

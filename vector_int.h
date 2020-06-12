@@ -284,3 +284,14 @@ vector<int> operator%(const vector<int> &u, vector<int> &v) {
 
     return remainder;
 }
+
+
+vector<int> pow(vector<int> v, int p) {
+    vector<int> powered = v;
+
+    for (int i = 1; i < p; i++) {
+        powered = powered * v;
+    }
+
+    return powered;
+}

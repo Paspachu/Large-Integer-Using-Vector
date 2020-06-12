@@ -10,6 +10,8 @@ If you need to change any int value to the above vector form, there is a functio
 
 (1) int_to_vector: takes int value and convert to vector<int> in opposite order, meaning first index of vector contains oneth digit.
 
+If you use the print function in the header file, it will print out the above vector<int> v like an integer.
+
 In header file, the following operators are defined:
 
 (1) +, addition

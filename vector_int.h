@@ -125,6 +125,21 @@ bool operator==(const vector<int> &u, const vector<int> &v) {
 }
 
 
+bool operator!=(const vector<int> &u, const vector<int> &v) {
+    if (u.size() != v.size()) {
+        return true;
+    }
+
+    for (int i = 0; i < u.size(); i++) {
+        if (u[i] != v[i]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 vector<int> operator+(const vector<int> &u, const vector<int> &v) {
     vector<int> sum, p, q;
     int up = 0;

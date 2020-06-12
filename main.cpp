@@ -13,12 +13,5 @@ int main() {
 
     print(pow(x, q));
 
-
-    // print(x/y);
-    // cout << (p/q) << endl;
-
-    // print(x%y);
-    // cout << (p%q) << endl;
-
     return 0;
 }
